@@ -1,11 +1,24 @@
 {
-  "name": "e-comm",
+  "name": "e-commerce-backend",
   "version": "1.0.0",
-  "description": "e-commerce",
+  "description": "E-commerce backend",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Rahul",
-  "license": "ISC"
+  "keywords": [
+    "node",
+    "tutorial"
+  ],
+  "author": "Rahul Sajwan",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "colors": "^1.4.0",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "mongodb": "^6.3.0",
+    "mongoose": "^7.6.3",
+    "simple-node-logger": "^21.8.12"
+  }
 }
