@@ -13,7 +13,7 @@ const main = async () =>{
     //find() return the product
     //toArray returns the product in proper format
     data= await data.find({}).toArray();
-    console.log(data);
+    console.log(data );
 }
 
 main();
