@@ -1,20 +1,35 @@
-const {MongoClient}= require('mongodb');
-const url = "mongodb://127.0.0.1:27017" ;
+const con = require('./mysqlConfig');
+const express = require('express');
 
-//connect to MongoDB using url
-const client = new MongoClient(url);     
-const database ='E-Commerce-Replica'
-async function getData(){
-    let result= await client.connect(url);
-    //which database connect to
-    let db=result.db(database);
-    //which collection connect to
-    let collection= db.collection('product');
-    //get the product from colection
-    //find() return the product
-    //toArray returns the product in proper format
-    let response = await collection.find().toArray();
-    console.log(response); 
-}
- 
-getData();
+const app = express();
+
+app.use(express.json());
+app.get('/', (req, res) => {
+    con.query("SELECT * FROM user", (err, rows) => {
+        if (err) {
+            res.send(err)
+        }
+        res.send(rows)
+    });
+})
+app.post('/', (req, res) => {
+    const data= req.body;
+    con.query("INSERT INTO user SET ?", data ,(err, rows,fields) => {
+        if (err) throw err;
+        res.send(rows)
+    });
+})
+
+app.put('/:id', (req, res) => {
+    const data= [req.body.name,req.body.password,req.body.user_type,req.params.id];
+    con.query("UPDATE user SET name=?,password=?,user_type=? WHERE id =?", data, (err, rows,fields) => {
+        if (err) throw err;
+        res.send(rows)
+    });
+})
+
+app.listen(5000);
+// con.query("SELECT * FROM user" , (err, rows) => {
+//     if (err) throw err;
+//     console.log(rows);
+// });
